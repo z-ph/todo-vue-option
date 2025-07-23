@@ -1,17 +1,17 @@
 <template>
   <div class="todo-container">
     <ShortcutBar
-      :allCompleted="allCompleted"
-      @clear-completed="clearCompleted"
-      @toggle-all="toggleAll"
+      :allCompleted="todoStore.allCompleted"
+      @clear-completed="todoStore.clearCompleted"
+      @toggle-all="todoStore.toggleAll"
     />
     <div class="todo-app">
       <h1 class="todo-title">todoList</h1>
-      <TodoInput @add-todo="addTodo" />
+      <TodoInput @add-todo="todoStore.addTodo" />
       <TodoList
-        :todoList="todoList"
-        @delete-todo="deleteTodo"
-        @toggle-todo="toggleTodo"
+        :todoList="todoStore.todoList"
+        @delete-todo="todoStore.deleteTodo"
+        @toggle-todo="todoStore.toggleTodo"
       />
     </div>
   </div>
@@ -21,6 +21,7 @@
 import ShortcutBar from './components/ShortcutBar.vue';
 import TodoInput from './components/TodoInput.vue';
 import TodoList from './components/TodoList.vue';
+import { useTodoStore } from './stores/todoStore';
 
 export default {
   name: 'App',
@@ -29,38 +30,11 @@ export default {
     TodoInput,
     TodoList,
   },
-  data() {
+  setup() {
+    const todoStore = useTodoStore();
     return {
-      todoList: [],
+      todoStore,
     };
-  },
-  computed: {
-    allCompleted() {
-      return this.todoList.every((todo) => todo.completed);
-    },
-  },
-  methods: {
-    addTodo(text) {
-      this.todoList.unshift({
-        text,
-        completed: false,
-      });
-    },
-    deleteTodo(index) {
-      this.todoList.splice(index, 1);
-    },
-    toggleTodo(index) {
-      this.todoList[index].completed = !this.todoList[index].completed;
-    },
-    clearCompleted() {
-      this.todoList = this.todoList.filter((item) => !item.completed);
-    },
-    toggleAll() {
-      const isAllCompleted = this.allCompleted;
-      this.todoList.forEach((todo) => {
-        todo.completed = !isAllCompleted;
-      });
-    },
   },
 };
 </script>

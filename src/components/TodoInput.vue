@@ -9,22 +9,27 @@
 </template>
 
 <script>
+import { useTodoStore } from '../stores/todoStore';
+import { ref } from 'vue';
+
 export default {
   name: 'TodoInput',
-  data() {
-    return {
-      inputText: '',
-    };
-  },
-  emits: ['add-todo'],
-  methods: {
-    addTodo() {
-      if (this.inputText.trim() === '') {
+  setup() {
+    const todoStore = useTodoStore();
+    const inputText = ref('');
+
+    const addTodo = () => {
+      if (inputText.value.trim() === '') {
         return;
       }
-      this.$emit('add-todo', this.inputText.trim());
-      this.inputText = '';
-    },
+      todoStore.addTodo(inputText.value.trim());
+      inputText.value = '';
+    };
+
+    return {
+      inputText,
+      addTodo,
+    };
   },
 };
 </script>

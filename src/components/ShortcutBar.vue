@@ -6,19 +6,17 @@
 </template>
 
 <script>
+import { useTodoStore } from '../stores/todoStore';
+
 export default {
   name: 'ShortcutBar',
-  props: {
-    allCompleted: Boolean,
-  },
-  emits: ['clear-completed', 'toggle-all'],
-  methods: {
-    clearCompleted() {
-      this.$emit('clear-completed');
-    },
-    toggleAll() {
-      this.$emit('toggle-all');
-    },
+  setup() {
+    const todoStore = useTodoStore();
+    return {
+      allCompleted: todoStore.allCompleted,
+      clearCompleted: todoStore.clearCompleted,
+      toggleAll: todoStore.toggleAll,
+    };
   },
 };
 </script>

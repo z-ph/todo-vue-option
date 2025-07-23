@@ -1,18 +1,13 @@
 <template>
   <div class="todo-container">
-    <ShortcutBar
-      :allCompleted="todoStore.allCompleted"
-      @clear-completed="todoStore.clearCompleted"
-      @toggle-all="todoStore.toggleAll"
-    />
+    <!-- 侧边快捷键栏组件 -->
+    <ShortcutBar />
     <div class="todo-app">
       <h1 class="todo-title">todoList</h1>
-      <TodoInput @add-todo="todoStore.addTodo" />
-      <TodoList
-        :todoList="todoStore.todoList"
-        @delete-todo="todoStore.deleteTodo"
-        @toggle-todo="todoStore.toggleTodo"
-      />
+      <!-- 待办事项输入组件 -->
+      <TodoInput />
+      <!-- 待办事项列表组件 -->
+      <TodoList />
     </div>
   </div>
 </template>
@@ -21,21 +16,18 @@
 import ShortcutBar from './components/ShortcutBar.vue';
 import TodoInput from './components/TodoInput.vue';
 import TodoList from './components/TodoList.vue';
-import { useTodoStore } from './stores/todoStore';
 
 export default {
   name: 'App',
   components: {
     ShortcutBar,
     TodoInput,
-    TodoList,
+    TodoList
   },
   setup() {
-    const todoStore = useTodoStore();
-    return {
-      todoStore,
-    };
-  },
+    // 无需额外逻辑，状态和操作由 Pinia 管理
+    return {};
+  }
 };
 </script>
 

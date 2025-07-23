@@ -7,20 +7,29 @@
 </template>
 
 <script>
+import { useTodoStore } from '../stores/todoStore';
+
 export default {
   name: 'TodoItem',
   props: {
     todo: Object,
     index: Number,
   },
-  emits: ['delete-todo', 'toggle-todo'],
-  methods: {
-    deleteTodo() {
-      this.$emit('delete-todo', this.index);
-    },
-    toggleTodo() {
-      this.$emit('toggle-todo', this.index);
-    },
+  setup(props) {
+    const todoStore = useTodoStore();
+
+    const deleteTodo = () => {
+      todoStore.deleteTodo(props.index);
+    };
+
+    const toggleTodo = () => {
+      todoStore.toggleTodo(props.index);
+    };
+
+    return {
+      deleteTodo,
+      toggleTodo,
+    };
   },
 };
 </script>

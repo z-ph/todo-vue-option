@@ -5,20 +5,11 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { useTodoStore } from '../stores/todoStore';
 
-export default {
-  name: 'ShortcutBar',
-  setup() {
-    const todoStore = useTodoStore();
-    return {
-      allCompleted: todoStore.allCompleted,
-      clearCompleted: todoStore.clearCompleted,
-      toggleAll: todoStore.toggleAll,
-    };
-  },
-};
+const todoStore = useTodoStore();
+const { allCompleted, clearCompleted, toggleAll } = todoStore;
 </script>
 
 <style scoped>

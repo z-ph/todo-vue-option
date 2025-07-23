@@ -6,31 +6,27 @@
   </li>
 </template>
 
-<script>
+<script setup>
 import { useTodoStore } from '../stores/todoStore';
-
-export default {
-  name: 'TodoItem',
-  props: {
-    todo: Object,
-    index: Number,
+const props = defineProps({
+  todo: {
+    type: Object,
+    required: true
   },
-  setup(props) {
-    const todoStore = useTodoStore();
+  index: {
+    type: Number,
+    required: true
+  }
+});
 
-    const deleteTodo = () => {
-      todoStore.deleteTodo(props.index);
-    };
+const todoStore = useTodoStore();
 
-    const toggleTodo = () => {
-      todoStore.toggleTodo(props.index);
-    };
+const deleteTodo = () => {
+  todoStore.deleteTodo(props.index);
+};
 
-    return {
-      deleteTodo,
-      toggleTodo,
-    };
-  },
+const toggleTodo = () => {
+  todoStore.toggleTodo(props.index);
 };
 </script>
 

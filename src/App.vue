@@ -1,34 +1,18 @@
 <template>
   <div class="todo-container">
-    <!-- 侧边快捷键栏组件 -->
     <ShortcutBar />
     <div class="todo-app">
       <h1 class="todo-title">todoList</h1>
-      <!-- 待办事项输入组件 -->
       <TodoInput />
-      <!-- 待办事项列表组件 -->
       <TodoList />
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import ShortcutBar from './components/ShortcutBar.vue';
 import TodoInput from './components/TodoInput.vue';
 import TodoList from './components/TodoList.vue';
-
-export default {
-  name: 'App',
-  components: {
-    ShortcutBar,
-    TodoInput,
-    TodoList
-  },
-  setup() {
-    // 无需额外逻辑，状态和操作由 Pinia 管理
-    return {};
-  }
-};
 </script>
 
 <style>

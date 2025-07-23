@@ -9,22 +9,11 @@
   </ul>
 </template>
 
-<script>
+<script setup>
 import TodoItem from './TodoItem.vue';
 import { useTodoStore } from '../stores/todoStore';
 
-export default {
-  name: 'TodoList',
-  components: {
-    TodoItem,
-  },
-  setup() {
-    const todoStore = useTodoStore();
-    return {
-      todoStore,
-    };
-  },
-};
+const todoStore = useTodoStore();
 </script>
 
 <style scoped>

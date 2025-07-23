@@ -8,29 +8,19 @@
   />
 </template>
 
-<script>
-import { useTodoStore } from '../stores/todoStore';
+<script setup>
 import { ref } from 'vue';
+import { useTodoStore } from '../stores/todoStore';
 
-export default {
-  name: 'TodoInput',
-  setup() {
-    const todoStore = useTodoStore();
-    const inputText = ref('');
+const todoStore = useTodoStore();
+const inputText = ref('');
 
-    const addTodo = () => {
-      if (inputText.value.trim() === '') {
-        return;
-      }
-      todoStore.addTodo(inputText.value.trim());
-      inputText.value = '';
-    };
-
-    return {
-      inputText,
-      addTodo,
-    };
-  },
+const addTodo = () => {
+  if (inputText.value.trim() === '') {
+    return;
+  }
+  todoStore.addTodo(inputText.value.trim());
+  inputText.value = '';
 };
 </script>
 

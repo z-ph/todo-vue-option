@@ -1,15 +1,20 @@
 <template>
   <div class="shortcut-bar">
     <button @click="clearCompleted">清空已完成</button>
-    <button @click="toggleAll">{{ allCompleted ? '取消全选' : '全选' }}</button>
+    <button @click="toggleAll">{{ todoStore.allCompleted ? '取消全选' : '全选' }}</button>
+    <!-- <button @click="toggleAll">{{ allCompleted ? '取消全选' : '全选' }}</button> -->
+
   </div>
 </template>
 
 <script setup>
+import { storeToRefs } from 'pinia';
 import { useTodoStore } from '../stores/todoStore';
 
 const todoStore = useTodoStore();
-const { allCompleted, clearCompleted, toggleAll } = todoStore;
+const { clearCompleted, toggleAll } = todoStore;
+// const { allCompleted } = todoStore;
+// const { allCompleted } = storeToRefs(todoStore);
 </script>
 
 <style scoped>

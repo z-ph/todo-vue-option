@@ -8,18 +8,28 @@
 <script>
 export default {
   name: 'ShortcutBar',
-  props: {
-    allCompleted: Boolean,
+  data(){
+    return {
+      allCompleted:false,
+    }
   },
-  emits: ['clear-completed', 'toggle-all'],
   methods: {
     clearCompleted() {
-      this.$emit('clear-completed');
+      EventBus.$emit('clear-completed');
     },
     toggleAll() {
-      this.$emit('toggle-all');
+      EventBus.$emit('toggle-all');
     },
   },
+  mounted() {
+    EventBus.$on('on-todo-list-changed', (todos) => {
+      if(todos.length === 0){
+        this.allCompleted = false;
+        return;
+      }
+      this.allCompleted = todos.every((todo) => todo.completed);
+    });
+  }
 };
 </script>
 

@@ -7,19 +7,21 @@
 </template>
 
 <script>
+import  EventBus  from '../utils/EventBus';
+
 export default {
   name: 'TodoItem',
   props: {
     todo: Object,
     index: Number,
   },
-  emits: ['delete-todo', 'toggle-todo'],
+
   methods: {
     deleteTodo() {
-      this.$emit('delete-todo', this.index);
+      EventBus.$emit('delete-todo', this.index);
     },
     toggleTodo() {
-      this.$emit('toggle-todo', this.index);
+      EventBus.$emit('toggle-todo', this.index);
     },
   },
 };

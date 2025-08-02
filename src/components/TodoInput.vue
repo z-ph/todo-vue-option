@@ -16,13 +16,12 @@ export default {
       inputText: '',
     };
   },
-  emits: ['add-todo'],
   methods: {
     addTodo() {
       if (this.inputText.trim() === '') {
         return;
       }
-      this.$emit('add-todo', this.inputText.trim());
+      EventBus.$emit('add-todo', this.inputText.trim());
       this.inputText = '';
     },
   },

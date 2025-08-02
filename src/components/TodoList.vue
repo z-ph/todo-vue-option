@@ -5,8 +5,6 @@
       :key="index"
       :todo="todo"
       :index="index"
-      @delete-todo="deleteTodo"
-      @toggle-todo="toggleTodo"
     />
   </ul>
 </template>
@@ -19,18 +17,18 @@ export default {
   components: {
     TodoItem,
   },
-  props: {
-    todoList: Array,
+  
+  data(){
+    return {
+      todoList: [],
+    }
   },
-  emits: ['delete-todo', 'toggle-todo'],
-  methods: {
-    deleteTodo(index) {
-      this.$emit('delete-todo', index);
-    },
-    toggleTodo(index) {
-      this.$emit('toggle-todo', index);
-    },
-  },
+  mounted(){
+    console.log('TodoList mounted');
+    EventBus.$on('on-todo-list-changed',(todos)=>{
+      this.todoList = todos;
+    })
+  }
 };
 </script>
 
